@@ -18,7 +18,7 @@
       <h1 class="text-2xl font-bold text-gray-800">
         Sustaina<span class="text-emerald-500">Sphere</span>
       </h1>
-      <a href="/SustainSphere/HTML/PARANOX2.html" class="bg-emerald-500 text-white font-semibold px-6 py-2 rounded-lg hover:bg-emerald-600 transition">
+      <a href="./PARANOX2.html" class="bg-emerald-500 text-white font-semibold px-6 py-2 rounded-lg hover:bg-emerald-600 transition">
         Home
       </a>
     </div>
@@ -117,7 +117,7 @@
         y: Math.random() * confettiCanvas.height - confettiCanvas.height,
         r: Math.random() * 6 + 2,
         d: Math.random() * 1 + 0.5,
-        color: `hsl(${Math.random() * 360}, 70%, 50%)`,
+        color: hsl(${Math.random() * 360}, 70%, 50%),
       });
     }
   }
@@ -187,7 +187,7 @@
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return alert("Please enter a valid email.");
     if (!message) return alert("Please write your message.");
 
-    showPopup("🎉 Thank you for contacting us!", `Hi ${name}, your message has been sent successfully.`);
+    showPopup("🎉 Thank you for contacting us!", Hi ${name}, your message has been sent successfully.);
     contactForm.reset();
   });
 
