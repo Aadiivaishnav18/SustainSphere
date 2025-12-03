@@ -1,0 +1,310 @@
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f0fdf4; 
+  color: #1f2937; 
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* Smooth scroll for better UX */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Sidebar */
+#sidebar {
+  transition: transform 0.3s ease-in-out;
+  background: linear-gradient(180deg, #10b981, #047857); 
+  color: #fff;
+  box-shadow: 4px 0 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Blur effect for main content when sidebar opens */
+.blurred {
+  filter: blur(6px) brightness(0.9);
+  transition: all 0.3s ease;
+}
+
+/* Overlay */
+#overlay {
+  transition: opacity 0.3s ease;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(2px);
+}
+
+/* Feature card */
+.feature-card {
+  background: #ffffff;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(16, 185, 129, 0.15); /* subtle green border */
+}
+
+.feature-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px -8px rgba(16, 185, 129, 0.25);
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.fade-in-element {
+  animation: fadeIn 0.9s ease-out forwards;
+  opacity: 0;
+}
+
+/* Gradient text (eco-inspired) */
+.gradient-text {
+  background: linear-gradient(to right, #10b981, #06b6d4, #22c55e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Buttons */
+.btn-eco {
+  display: inline-block;
+  background: linear-gradient(90deg, #10b981, #22c55e);
+  color: #fff;
+  font-weight: 600;
+  padding: 0.8rem 2rem;
+  border-radius: 9999px;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.25);
+}
+
+.btn-eco:hover {
+  background: linear-gradient(90deg, #059669, #16a34a);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(16, 185, 129, 0.35);
+}
+
+/* Headings */
+h1, h2, h3 {
+  font-weight: 700;
+  color: #064e3b; /* deep eco green */
+}
+
+/* Subtle section background */
+.section-light {
+  background: #ecfdf5;
+  border-radius: 1rem;
+  padding: 2rem;
+  margin: 1.5rem 0;
+}
+
+/* Gradient heading */
+.gradient-text {
+  background: linear-gradient(90deg, #065f46, #10b981);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Fade-in animation for modal */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+#tipModal.show {
+  display: flex;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+/* Modal inner content */
+#tipModal div {
+  animation: fadeIn 0.5s ease;
+}
+
+/* style.css */
+
+/* ... (your existing CSS) ... */
+
+.hero-background-media {
+    filter: brightness(0.8) contrast(1.1); /* Adjust brightness and contrast for better base look */
+}
+
+/* Optional: If you want a specific gradient overlay on top of the image */
+.hero-overlay-gradient {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)); /* Dark gradient from top to bottom */
+}
+
+/* For the gradient text when on a dark background */
+.gradient-text-white {
+    background: linear-gradient(to right, #a7f3d0, #67e8f9, #a7f3d0); /* Lighter gradient colors */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+ body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+} 
+
+/* Fullscreen video background */
+ .bg-video {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  z-index: -1;
+} 
+
+/* Dark overlay to improve text contrast */
+.overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: -1;
+} 
+
+
+/* Divider */
+ .divider {
+  margin: 20px 0;
+  position: relative;
+  text-align: center;
+}
+.divider span {
+  background: white;
+  padding: 0 10px;
+  position: relative;
+  z-index: 1;
+}
+.divider::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: #ccc;
+  z-index: 0;
+} 
+
+/* Social buttons */
+ .social-login button {
+  width: 100%;
+  margin: 8px 0;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.social-login img {
+  width: 20px;
+  margin-right: 10px;
+}
+
+.google-btn { background: #fff; border: 1px solid #ddd; }
+.facebook-btn { background: #1877f2; color: white; }
+.github-btn { background: #24292e; color: white; }
+ 
+/* ================== RESPONSIVE ================== */
+
+/* Large devices: tablets / small laptops (≤992px) */
+@media (max-width: 992px) {
+  /* Grid container: 2 columns */
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem; /* optional spacing */
+  }
+
+  /* Optional: adjust padding / margins */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* Medium devices: tablets / large phones (≤768px) */
+@media (max-width: 768px) {
+  /* Hide desktop nav links, show mobile menu button */
+  .nav-links {
+    display: none !important;
+  }
+  .menu-toggle {
+    display: block !important;
+  }
+
+  /* Footer: stack items vertically */
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  /* Adjust feature cards or grid items */
+  .feature-card {
+    padding: 1rem;
+  }
+}
+
+/* Small devices: smartphones (≤600px) */
+@media (max-width: 600px) {
+  /* Grid: 1 column */
+  .grid-container {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  /* Buttons: full width */
+  .feedback-btn, .btn-eco, .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Modals: smaller and centered */
+  .feedback-modal-content {
+    margin: 15% auto;
+    padding: 15px;
+  }
+
+  /* Hero section text: smaller font */
+  .hero-overlay-gradient h2 {
+    font-size: 2rem;
+  }
+}
+
+/* Extra small devices: very small phones (≤400px) */
+@media (max-width: 400px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .feature-card {
+    padding: 0.75rem;
+  }
+
+  .hero-overlay-gradient h2 {
+    font-size: 1.75rem;
+    line-height: 1.2;
+  }
+
+  .footer-container {
+    font-size: 0.9rem;
+  }
+
+  .feedback-modal-content {
+    margin: 10% auto;
+    padding: 10px;
+  }
+}

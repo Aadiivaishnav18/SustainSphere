@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learning Resources – SustainaSphere</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes bounceIn {
+      0% { transform: scale(0); opacity: 0; }
+      50% { transform: scale(1.2); opacity: 1; }
+      70% { transform: scale(0.9); }
+      100% { transform: scale(1); }
+    }
+    .animate-bounceIn {
+      animation: bounceIn 0.6s ease forwards;
+    }
+
+    #confetti {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 0;
+      pointer-events: none;
+      z-index: 60;
+    }
+    .confetti-piece {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: red;
+      opacity: 0.7;
+      transform: rotate(45deg);
+      animation: fall 2s linear forwards;
+    }
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(400px) rotate(360deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body class="bg-green-50">
+
+  <section id="eco-game" class="bg-green-200 flex items-center justify-center min-h-screen py-16">
+  <div class="container px-6 text-center">
+    <h2 class="text-3xl font-bold text-emerald-900 mb-6">♻ Eco Quiz Game</h2>
+    <p class="text-emerald-900 mb-8">Answer eco-questions, test your knowledge, and earn Green Credits! 🌍</p>
+    
+    
+    <div id="quiz" class="bg-green-50 p-6 rounded-xl shadow-lg max-w-lg mx-auto min-h-[220px] flex flex-col justify-between">
+      <h3 id="question" class="text-xl font-semibold text-emerald-900 mb-4 break-words">Loading...</h3>
+      <div id="answers" class="grid grid-cols-1 gap-3"></div>
+    </div>
+    
+      <div id="score-card" class="hidden bg-green-50 mt-10 p-6 rounded-xl shadow-lg max-w-lg mx-auto">
+      <h3 class="text-2xl font-bold text-emerald-900 mb-4">📊 Your Quiz Results</h3>
+      <p class="text-lg text-emerald-900">Correct Answers: <span id="correct"></span></p>
+      <p class="text-lg text-emerald-900">Wrong Answers: <span id="wrong"></span></p>
+      <p class="text-lg font-bold text-emerald-900 mt-4">🌱 Green Credits Earned: <span id="earned"></span></p>
+      <button onclick="restartQuiz()" class="mt-6 bg-emerald-600 text-white px-5 py-2 rounded-lg hover:bg-emerald-700 transition">Play Again</button>
+    </div>
+  </div>
+</section>
+
+   
+  <div id="popup" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center hidden z-50">
+    <div class="bg-white rounded-2xl shadow-xl p-8 text-center max-w-sm animate-bounce">
+      <h2 class="text-2xl font-bold text-emerald-600 mb-3">🎉 Congratulations!</h2>
+      <p id="popup-text" class="text-gray-700 mb-5">You unlocked a badge!</p>
+      <button onclick="closePopup()" class="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700">Awesome!</button>
+    </div>
+  </div>
+</section>
+    <div id="confetti"></div>
+  <script>
+    const quizData = [
+      { q: "Which material is NOT recyclable?", options: ["Glass", "Plastic", "Styrofoam", "Paper"], answer: "Styrofoam" },
+      { q: "Best way to reduce carbon footprint?", options: ["Plant trees", "Use plastic bags", "Drive more cars", "Burn waste"], answer: "Plant trees" },
+      { q: "Which gas is responsible for global warming?", options: ["Oxygen", "Carbon Dioxide", "Nitrogen", "Helium"], answer: "Carbon Dioxide" },
+      { q: "What is the 3R principle?", options: ["Recycle, Reduce, Reuse", "Read, Ride, Run", "Right, Risk, Reward", "Reuse, React, Respond"], answer: "Recycle, Reduce, Reuse" },
+      { q: "Which energy is renewable?", options: ["Coal", "Wind", "Natural Gas", "Oil"], answer: "Wind" },
+      { q: "What is the main source of plastic pollution?", options: ["Fishing Nets", "Single-use Plastics", "Car Tires", "Furniture"], answer: "Single-use Plastics" },
+      { q: "What type of fuel do electric cars use?", options: ["Diesel", "Petrol", "Electricity", "Kerosene"], answer: "Electricity" },
+      { q: "Which sector contributes most to CO₂ emissions?", options: ["Transport", "Agriculture", "Industry", "Energy Production"], answer: "Energy Production" },
+      { q: "Which animal is most affected by melting ice caps?", options: ["Elephants", "Polar Bears", "Lions", "Kangaroos"], answer: "Polar Bears" },
+      { q: "Which is biodegradable?", options: ["Banana Peel", "Plastic Bottle", "Aluminum Can", "Glass"], answer: "Banana Peel" },
+      { q: "What is composting?", options: ["Burning waste", "Recycling metals", "Turning organic waste into fertilizer", "Melting plastic"], answer: "Turning organic waste into fertilizer" },
+      { q: "Which layer of the atmosphere protects us from UV rays?", options: ["Ozone Layer", "Troposphere", "Stratosphere", "Mesosphere"], answer: "Ozone Layer" },
+      { q: "Which type of bag is eco-friendly?", options: ["Plastic", "Paper", "Cloth", "Leather"], answer: "Cloth" },
+      { q: "Main cause of deforestation?", options: ["Urbanization", "Plastic", "Recycling", "Electric Cars"], answer: "Urbanization" },
+      { q: "Which country generates the most plastic waste?", options: ["India", "USA", "China", "Brazil"], answer: "USA" }
+    ];
+
+    let currentQ = 0;
+    let correctCount = 0;
+    let wrongCount = 0;
+    let creditsEarned = 0;
+
+    function loadQuestion() {
+      const qBox = document.getElementById("question");
+      const ansBox = document.getElementById("answers");
+      const scoreCard = document.getElementById("score-card");
+
+      if (currentQ < quizData.length) {
+        const qData = quizData[currentQ];
+        qBox.textContent = `Q${currentQ + 1}: ${qData.q}`;
+        ansBox.innerHTML = "";
+        scoreCard.classList.add("hidden");
+
+        qData.options.forEach(opt => {
+          const btn = document.createElement("button");
+          btn.textContent = opt;
+          btn.className = "bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition";
+          btn.onclick = () => checkAnswer(opt);
+          ansBox.appendChild(btn);
+        });
+      } else {
+        showScore();
+      }
+    }
+
+    function checkAnswer(opt) {
+      if (opt === quizData[currentQ].answer) {
+        correctCount++;
+        creditsEarned += 50;
+      } else {
+        wrongCount++;
+      }
+      currentQ++;
+      loadQuestion();
+    }
+
+    function showScore() {
+      document.getElementById("quiz").classList.add("hidden");
+      const scoreCard = document.getElementById("score-card");
+      scoreCard.classList.remove("hidden");
+      document.getElementById("correct").textContent = correctCount;
+      document.getElementById("wrong").textContent = wrongCount;
+      document.getElementById("earned").textContent = creditsEarned;
+
+      const popup = document.getElementById("popup");
+      const popupText = document.getElementById("popup-text");
+      popupText.textContent = `You earned ${creditsEarned} Green Credits! 🌱`;
+      popup.classList.remove("hidden");
+
+    
+      launchConfetti();
+    }
+
+    function closePopup() {
+      document.getElementById("popup").classList.add("hidden");
+    }
+
+    function restartQuiz() {
+      currentQ = 0;
+      correctCount = 0;
+      wrongCount = 0;
+      creditsEarned = 0;
+      document.getElementById("quiz").classList.remove("hidden");
+      document.getElementById("score-card").classList.add("hidden");
+      loadQuestion();
+    }
+
+    function launchConfetti() {
+      const confettiContainer = document.getElementById("confetti");
+      for(let i=0; i<100; i++) {
+        const confetti = document.createElement("div");
+        confetti.className = "confetti-piece";
+        confetti.style.backgroundColor = `hsl(${Math.random()*360}, 100%, 50%)`;
+        confetti.style.left = `${Math.random()*100}%`;
+        confetti.style.animationDuration = `${1 + Math.random()*2}s`;
+        confettiContainer.appendChild(confetti);
+
+        setTimeout(() => confetti.remove(), 3000);
+      }
+    }
+
+
+    loadQuestion();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - SustainaSphere</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .sidebar {
+      transition: transform 0.3s ease-in-out;
+    }
+  </style>
+</head>
+
+<body class="font-inter bg-gray-50 text-gray-900">
+
+  <aside id="sidebar" class="fixed top-0 left-0 w-64 h-full bg-emerald-900 text-white shadow-xl transform -translate-x-full sidebar z-50">
+    <div class="p-6">
+      <h2 class="text-2xl font-extrabold mb-8 text-center border-b border-emerald-700 pb-3">SustainaSphere</h2>
+  <nav class="space-y-4"></nav>
+<ul class="space-y-4">
+
+      <a href="/SustainSphere//HTML/PARANOX2.html" class="flex items-center space-x-3 text-white hover:text-emerald-500 transition">
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+    <path d="M3 12l9-9 9 9h-3v9h-12v-9h-3z"/>
+  </svg>
+  <span class="text-white font-semibold">Home</span>
+</a>
+
+<a href="/SustainSphere//HTML/contact.html" class="flex items-center space-x-3 text-white hover:text-emerald-500 transition">
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+    <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+  </svg>
+  <span class="text-white font-semibold">Contect</span>
+</a>
+
+
+    </div>
+  </aside>
+
+  <!-- Sidebar Button -->
+    <button id="menuToggle" class="fixed top-5 right-3 z-50 p-2 rounded-md text-black md:hidden hover:bg--200white transition"> 
+    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+    </svg>
+</button>
+
+
+
+
+  <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40"></div>
+
+  <header class="bg-white shadow sticky top-0 z-30">
+    <div class="container mx-auto flex items-center justify-between px-8 md:px-16 py-4">
+      <div class="flex items-center space-x-4">
+        <img src="/SustainSphere//CSS/Sustain.jpg" alt="SustainaSphere Logo" class="w-12 h-12 rounded-full object-cover shadow-md">
+        <h1 class="text-2xl font-extrabold bg-gradient-to-r from-emerald-500 to-green-700 bg-clip-text text-transparent">
+          SustainaSphere
+        </h1>
+      </div>
+      <nav class="hidden md:flex space-x-8 text-gray-700 font-medium">
+        <a href="/SustainSphere//HTML/PARANOX2.html" class="hover:text-emerald-600 transition-colors duration-200">Home</a>
+        <a href="/SustainSphere//HTML/contact.html" class="hover:text-emerald-600 transition-colors duration-200">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+
+  <section class="py-20 bg-gradient-to-r from-emerald-500 to-cyan-500 text-center text-white">
+    <div class="container mx-auto px-6">
+      <h2 class="text-4xl md:text-5xl font-bold mb-4">
+        <span class="text-emerald-900">About</span> 
+        <span class="bg-clip-text text-transparent bg-gradient-to-r from-emerald-200 to-cyan-200">SustainaSphere</span>
+      </h2>
+      <p class="text-lg max-w-2xl mx-auto">
+        Building a sustainable future through technology, community, and collective action.
+      </p>
+    </div>
+  </section>
+
+ 
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-6 md:flex md:items-center md:gap-12">
+      <div class="md:w-1/2">
+        <img src="https://i.pinimg.com/736x/40/f3/e6/40f3e6bd988eb9dfce39658b65b5c469.jpg" alt="Our Mission" class="rounded-2xl shadow-lg">
+      </div>
+      <div class="md:w-1/2 mt-8 md:mt-0">
+        <h3 class="text-3xl font-bold mb-4">Our Story</h3>
+        <p class="text-gray-600 mb-4">
+          SustainaSphere started with a simple vision: empower individuals, communities, and businesses to 
+          live more sustainably while making eco-friendly choices accessible to everyone.
+        </p>
+        <p class="text-gray-600">
+          By combining AI, IoT, and blockchain with a human-centered design, we’re creating 
+          a hub for learning, sharing, and taking impactful action toward a greener planet.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-6 text-center">
+      <h3 class="text-3xl font-bold mb-10">Our Mission & Vision</h3>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="p-8 bg-white rounded-2xl shadow hover:shadow-lg transition">
+          <h4 class="text-xl font-semibold mb-3">Mission</h4>
+          <p class="text-gray-600">
+            To empower people and organizations with tools that make sustainable living practical, 
+            measurable, and rewarding.
+          </p>
+        </div>
+        <div class="p-8 bg-white rounded-2xl shadow hover:shadow-lg transition">
+          <h4 class="text-xl font-semibold mb-3">Vision</h4>
+          <p class="text-gray-600">
+            A world where technology and community-driven innovation work together to create 
+            a balanced and sustainable planet for future generations.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<section class="py-16 bg-white">
+  <div class="container mx-auto px-6 max-w-5xl text-center">
+    <h3 class="text-3xl font-bold mb-12">Meet Our Team</h3>
+
+    
+    <div class="grid md:grid-cols-3 gap-12 mb-12">
+      <!-- Member 1 -->
+      <div class="relative group">
+        <img src="/SustainSphere//CSS/PIC1.png" class="mx-auto rounded-full w-44 h-44 object-cover shadow-lg transition-transform duration-300 group-hover:scale-105">
+        <div class="mt-4">
+          <h4 class="text-xl font-semibold">PUNEET BAGHANI</h4>
+          <p class="text-gray-500">Founder & Visionary</p>
+        </div>
+        <div class="absolute inset-0 flex items-center justify-center rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-800 text-xl hover:text-blue-400"><i class="fab fa-linkedin"></i></a>
+            <a href="#" class="text-gray-800 text-xl hover:text-blue-500"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-gray-800 text-xl hover:text-pink-500"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Member 2 -->
+      <div class="relative group">
+        <img src="/SustainSphere//CSS/aadii.jpg" class="mx-auto rounded-full w-44 h-44 object-cover shadow-lg transition-transform duration-300 group-hover:scale-105">
+        <div class="mt-4">
+          <h4 class="text-xl font-semibold">ADITYA VAISHNAV</h4>
+          <p class="text-gray-500">Lead Developer</p>
+        </div>
+        <div class="absolute inset-0 flex items-center justify-center rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-800 text-xl hover:text-blue-400"><i class="fab fa-linkedin"></i></a>
+            <a href="#" class="text-gray-800 text-xl hover:text-blue-500"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-gray-800 text-xl hover:text-pink-500"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Member 3 -->
+      <div class="relative group">
+        <img src="/SustainSphere//CSS/krishna.jpg" class="mx-auto rounded-full w-44 h-44 object-cover shadow-lg transition-transform duration-300 group-hover:scale-105">
+        <div class="mt-4">
+          <h4 class="text-xl font-semibold">KRISHNA SHARMA</h4>
+          <p class="text-gray-500">Frontend Developer</p>
+        </div>
+        <div class="absolute inset-0 flex items-center justify-center rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-800 text-xl hover:text-blue-400"><i class="fab fa-linkedin"></i></a>
+            <a href="#" class="text-gray-800 text-xl hover:text-blue-500"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-gray-800 text-xl hover:text-pink-500"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex justify-center gap-12">
+      <!-- Member 4 -->
+      <div class="relative group">
+        <img src="/SustainSphere//CSS/ashwani .jpg" class="mx-auto rounded-full w-44 h-44 object-cover shadow-lg transition-transform duration-300 group-hover:scale-105">
+        <div class="mt-4">
+          <h4 class="text-xl font-semibold">ASHWANI KUMAR SHARMA</h4>
+          <p class="text-gray-500">Backend Developer</p>
+        </div>
+        <div class="absolute inset-0 flex items-center justify-center rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-800 text-xl hover:text-blue-400"><i class="fab fa-linkedin"></i></a>
+            <a href="#" class="text-gray-800 text-xl hover:text-blue-500"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-gray-800 text-xl hover:text-pink-500"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Member 5 -->
+      <div class="relative group">
+        <img src="/SustainSphere//CSS/sanjeev.jpg" class="mx-auto rounded-full w-44 h-44 object-cover shadow-lg transition-transform duration-300 group-hover:scale-105">
+        <div class="mt-4">
+          <h4 class="text-xl font-semibold">SANJEEV KUMAR MANDAL</h4>
+          <p class="text-gray-500">UI/UX Designer</p>
+        </div>
+        <div class="absolute inset-0 flex items-center justify-center rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-800 text-xl hover:text-blue-400"><i class="fab fa-linkedin"></i></a>
+            <a href="#" class="text-gray-800 text-xl hover:text-blue-500"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-gray-800 text-xl hover:text-pink-500"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+   <section class="py-16 bg-emerald-600 text-center">
+    <h3 class="text-3xl font-bold text-white mb-4">Join Us in Building a Sustainable Future</h3>
+    <p class="text-emerald-100 mb-6">Be part of SustainaSphere’s journey and make an impact today.</p>
+    <a href="/HTML/contact.html" class="bg-white text-emerald-600 font-semibold px-6 py-3 rounded-lg shadow hover:bg-emerald-50">
+      Get Involved
+    </a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-400 py-6 text-center">
+    <p>© 2025 SustainaSphere. All rights reserved.</p>
+  </footer>
+
+  <!-- Sidebar Script -->
+  <script>
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    const toggle = document.getElementById('menuToggle');
+
+    toggle.addEventListener('click', () => {
+      sidebar.classList.toggle('-translate-x-full');
+      overlay.classList.toggle('hidden');
+    });
+
+    overlay.addEventListener('click', () => {
+      sidebar.classList.add('-translate-x-full');
+      overlay.classList.add('hidden');
+    });
+  </script>
+
+</body>
+</html>

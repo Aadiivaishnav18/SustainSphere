@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eco Actions – SustainaSphere</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(to right, #e0f7fa, #ccfbf1);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .action-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    .action-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    }
+    .completed {
+      background-color: #bbf7d0 !important;
+      border-color: #34d399 !important;
+    }
+  </style>
+</head>
+<body class="p-6">
+
+  <div class="max-w-4xl mx-auto bg-white p-8 rounded-2xl shadow-xl">
+    <h1 class="text-4xl font-bold text-center text-emerald-600 mb-4"> Eco-Friendly Actions</h1>
+    <p class="text-center text-gray-600 mb-6">Take small eco-friendly actions like saving water or recycling to earn points.</p>
+
+    <h2 id="score" class="text-center text-xl font-semibold text-green-700 mb-8">Total Score: 0</h2>
+    
+    <div id="actions-container" class="grid grid-cols-1 md:grid-cols-2 gap-8"></div>
+
+    <div class="text-center mt-10">
+      <button onclick="resetActions()" class="bg-gradient-to-r from-emerald-500 to-green-600 text-white px-6 py-3 rounded-xl hover:opacity-90 shadow-md">
+        Reset Progress
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const actions = [
+      { action: "Turn off lights when not needed", points: 5 },
+      { action: "Recycle plastic bottles", points: 10 },
+      { action: "Use reusable shopping bag", points: 5 },
+      { action: "Take a shorter shower", points: 10 },
+      { action: "Plant a tree", points: 20 },
+      { action: "Use public transport or cycle", points: 15 },
+      { action: "Save paper by going digital", points: 5 },
+      { action: "Avoid single-use plastics", points: 10 },
+      { action: "Compost food waste", points: 15 },
+      { action: "Switch to LED bulbs", points: 10 }
+    ];
+
+    let score = 0;
+    const container = document.getElementById("actions-container");
+    const scoreDisplay = document.getElementById("score");
+
+    actions.forEach((item, index) => {
+      const card = document.createElement("div");
+      card.classList.add("action-card", "bg-emerald-50", "p-6", "rounded-xl", "shadow-md", "border", "border-emerald-200");
+
+      const title = document.createElement("h3");
+      title.classList.add("text-lg", "font-semibold", "mb-2");
+      title.textContent = item.action;
+
+      const btn = document.createElement("button");
+      btn.textContent = `Complete (+${item.points} pts)`;
+      btn.classList.add("mt-3", "bg-gradient-to-r", "from-emerald-500", "to-green-600", "text-white", "px-4", "py-2", "rounded-lg", "hover:opacity-90", "shadow-md");
+
+      btn.addEventListener("click", () => {
+        if (!card.classList.contains("completed")) {
+          score += item.points;
+          scoreDisplay.textContent = `Total Score: ${score}`;
+          card.classList.add("completed");
+        }
+      });
+
+      card.appendChild(title);
+      card.appendChild(btn);
+      container.appendChild(card);
+    });
+
+    function resetActions() {
+      score = 0;
+      scoreDisplay.textContent = "Total Score: 0";
+      document.querySelectorAll(".action-card").forEach(card => {
+        card.classList.remove("completed");
+      });
+    }
+  </script>
+</body>
+</html>

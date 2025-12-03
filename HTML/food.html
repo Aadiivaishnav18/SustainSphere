@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Food & Resource Sharing – Sustainable Development</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #e8f5e9, #d9f99d, #bbf7d0);
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .bg-shape {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.3;
+      animation: float 12s ease-in-out infinite;
+    }
+    .shape1 { width: 180px; height: 180px; background: #86efac; top: 10%; left: 15%; animation-delay: 0s; }
+    .shape2 { width: 240px; height: 240px; background: #a7f3d0; top: 60%; left: 70%; animation-delay: 3s; }
+    .shape3 { width: 120px; height: 120px; background: #d9f99d; top: 30%; left: 80%; animation-delay: 6s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-30px) scale(1.05); }
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.5);
+      transition: all 0.3s ease;
+    }
+    .card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 8px 28px rgba(34, 197, 94, 0.3);
+    }
+
+    .popup {
+      background: rgba(0, 0, 0, 0.55);
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    .popup.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .popup-content {
+      transform: scale(0.8);
+      opacity: 0;
+      transition: all 0.4s ease;
+    }
+    .popup.active .popup-content {
+      transform: scale(1);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="flex flex-col items-center justify-start py-12 px-4">
+
+  <!-- Animated Background Elements -->
+  <div class="bg-shape shape1"></div>
+  <div class="bg-shape shape2"></div>
+  <div class="bg-shape shape3"></div>
+
+ 
+  <section class="text-center mb-12 relative z-10">
+    <h1 class="text-5xl font-extrabold text-green-900 mb-3">Food & Resource Sharing</h1>
+    <p class="text-green-800 text-lg max-w-3xl mx-auto leading-relaxed">
+      Join hands to create a sustainable and compassionate community.
+      Share surplus food, clothes, books, or essential items and help those in need.  
+      Together, we can reduce waste and promote equality through collective kindness.
+    </p>
+  </section>
+
+
+  <section class="card rounded-2xl p-8 shadow-lg w-full max-w-2xl mb-12 relative z-10">
+    <h2 class="text-3xl font-bold text-green-900 mb-6 text-center">Share a Resource</h2>
+    <form id="shareForm" class="space-y-5">
+      <div>
+        <label class="block text-green-900 font-semibold mb-1">Your Name</label>
+        <input id="name" type="text" class="w-full px-4 py-2 rounded-lg border border-green-300 focus:ring-2 focus:ring-green-500 focus:outline-none" placeholder="Enter your name" required>
+      </div>
+      <div>
+        <label class="block text-green-900 font-semibold mb-1">Item Type</label>
+        <select id="type" class="w-full px-4 py-2 rounded-lg border border-green-300 focus:ring-2 focus:ring-green-500 focus:outline-none">
+          <option value="Food">Food</option>
+          <option value="Clothing">Clothing</option>
+          <option value="Books">Books</option>
+          <option value="Household Items">Household Items</option>
+          <option value="Hygiene Products">Hygiene Products</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-green-900 font-semibold mb-1">Location</label>
+        <input id="location" type="text" class="w-full px-4 py-2 rounded-lg border border-green-300 focus:ring-2 focus:ring-green-500 focus:outline-none" placeholder="Enter location or city" required>
+      </div>
+      <div>
+        <label class="block text-green-900 font-semibold mb-1">Contact Info</label>
+        <input id="contact" type="text" class="w-full px-4 py-2 rounded-lg border border-green-300 focus:ring-2 focus:ring-green-500 focus:outline-none" placeholder="Phone or email" required>
+      </div>
+      <div>
+        <label class="block text-green-900 font-semibold mb-1">Urgency Level</label>
+        <select id="urgency" class="w-full px-4 py-2 rounded-lg border border-green-300 focus:ring-2 focus:ring-green-500 focus:outline-none">
+          <option value="Normal">Normal</option>
+          <option value="Urgent">Urgent</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-green-900 font-semibold mb-1">Description</label>
+        <textarea id="description" class="w-full px-4 py-2 rounded-lg border border-green-300 focus:ring-2 focus:ring-green-500 focus:outline-none" placeholder="Describe your resource..." required></textarea>
+      </div>
+      <div>
+        <label class="block text-green-900 font-semibold mb-1">Upload Image (optional)</label>
+        <input id="image" type="file" accept="image/*" class="w-full text-sm text-green-700 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:font-semibold file:bg-green-100 file:text-green-700 hover:file:bg-green-200">
+      </div>
+      <button type="submit" class="w-full py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all">
+         Share Resource
+      </button>
+    </form>
+  </section>
+
+ 
+  <section class="text-center max-w-3xl mb-14 relative z-10">
+    <h2 class="text-3xl font-bold text-green-900 mb-3">Why It Matters</h2>
+    <p class="text-green-800 leading-relaxed">
+      Every act of sharing strengthens our communities and contributes to a sustainable world.
+      Food sharing reduces hunger and waste, clothing donations protect dignity, and reusing items reduces carbon footprints.  
+      Let’s make sustainability a shared responsibility.
+    </p>
+  </section>
+
+
+  <section class="w-full max-w-6xl mb-10 relative z-10">
+    <h2 class="text-3xl font-bold text-green-900 mb-6 text-center">Shared Resources</h2>
+    <div id="sharedList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+  </section>
+
+  
+  <div id="popup" class="popup">
+    <div class="popup-content bg-white rounded-2xl p-8 text-center max-w-sm mx-auto shadow-2xl border border-green-300">
+      <h3 id="popupText" class="text-lg font-semibold text-green-800 mb-6"></h3>
+      <button id="closePopup" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-all">
+        OK
+      </button>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    const form = document.getElementById("shareForm");
+    const list = document.getElementById("sharedList");
+    const popup = document.getElementById("popup");
+    const popupText = document.getElementById("popupText");
+    const closePopup = document.getElementById("closePopup");
+
+    let resources = JSON.parse(localStorage.getItem("resources")) || [];
+    render();
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const type = document.getElementById("type").value;
+      const location = document.getElementById("location").value.trim();
+      const contact = document.getElementById("contact").value.trim();
+      const urgency = document.getElementById("urgency").value;
+      const description = document.getElementById("description").value.trim();
+      const imageInput = document.getElementById("image");
+      let imageURL = "";
+
+      if (imageInput.files.length > 0) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          imageURL = e.target.result;
+          addResource(name, type, location, contact, urgency, description, imageURL);
+        };
+        reader.readAsDataURL(imageInput.files[0]);
+      } else {
+        addResource(name, type, location, contact, urgency, description, imageURL);
+      }
+    });
+
+    function addResource(name, type, location, contact, urgency, description, imageURL) {
+      const item = { id: Date.now(), name, type, location, contact, urgency, description, imageURL };
+      resources.push(item);
+      localStorage.setItem("resources", JSON.stringify(resources));
+      form.reset();
+      render();
+      showPopup("Resource shared successfully! Thank you for contributing!");
+    }
+
+    function render() {
+      list.innerHTML = "";
+      resources.forEach((r) => {
+        const card = document.createElement("div");
+        card.className = "card rounded-xl p-5 border border-green-300 shadow-md transition-all hover:shadow-xl";
+        card.innerHTML = `
+          ${r.imageURL ? `<img src="${r.imageURL}" class="w-full h-40 object-cover rounded-lg mb-3">` : ""}
+          <h3 class="text-xl font-bold text-green-800 mb-1">${r.type}</h3>
+          <p class="text-green-900"><strong>Shared by:</strong> ${r.name}</p>
+          <p class="text-green-700 text-sm mb-1"><strong>Location:</strong> ${r.location}</p>
+          <p class="text-green-700 text-sm mb-1"><strong>Contact:</strong> ${r.contact}</p>
+          <p class="text-green-700 text-sm mb-1"><strong>Urgency:</strong> <span class="${r.urgency === "Urgent" ? "text-red-600 font-semibold" : "text-green-700"}">${r.urgency}</span></p>
+          <p class="text-green-800 mt-2">${r.description}</p>
+          <button data-id="${r.id}" class="removeBtn mt-4 px-3 py-1 bg-red-500 text-white text-sm rounded hover:bg-red-600 transition">Remove</button>
+        `;
+        list.appendChild(card);
+      });
+
+      document.querySelectorAll(".removeBtn").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          const id = e.target.getAttribute("data-id");
+          resources = resources.filter((r) => r.id != id);
+          localStorage.setItem("resources", JSON.stringify(resources));
+          render();
+          showPopup("Resource removed successfully!");
+        });
+      });
+    }
+
+    function showPopup(message) {
+      popupText.textContent = message;
+      popup.classList.add("active");
+    }
+
+    closePopup.addEventListener("click", () => {
+      popup.classList.remove("active");
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Features</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/SustainSphere/CSS/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMD/cdw/yD6YwG+5F2G1Wz5w5eFzP3k4oM5i85e4P6fV5bE8VzM5z6L4oG5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body class="text-gray-800">
+
+  <!-- Header -->
+  <header id="mainHeader" class="bg-emerald-900 fixed top-0 left-0 right-0 z-50 shadow-sm">
+    <div class="container mx-auto pl-6 pr-6 py-4 flex justify-between items-center">
+   
+      <div class="flex items-center space-x-3">
+        <img src="/SustainSphere//CSS/Sustain.jpg" alt="Sustainasphere Logo" class="h-16 w-16 rounded-full object-cover shadow-lg" />
+        <h1 class="text-2xl font-bold text-white">Sustaina<span class="text-emerald-500">Sphere</span></h1>
+      </div>
+
+  
+      <nav class="hidden md:flex flex-grow justify-center space-x-12">
+        <a href="/SustainSphere//HTML/PARANOX2.html" class="text-white hover:text-emerald-500 transition-colors">Home</a>
+        <a href="#features" class="text-white hover:text-emerald-500 transition-colors">Features</a>
+        <a href="#future" class="text-white hover:text-emerald-500 transition-colors">Future-Ready</a>
+      </nav>
+
+      
+      <div class="hidden md:block">
+        <a href="/SustainSphere//HTML/sign out .html" class="bg-emerald-500 text-white font-semibold text-xl px-12 py-4 rounded-lg hover:bg-emerald-600 transition-colors shadow-sm">
+         Sign Out
+        </a>
+      </div>
+
+      <button id="menu-btn" class="md:hidden text-gray-200 focus:outline-none">
+        <svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Sidebar -->
+  <aside id="sidebar" class="fixed top-0 left-0 w-64 h-full bg-white shadow-xl transform -translate-x-full transition-transform duration-300 z-50">
+    <div class="p-6 relative">
+   
+      <div class="flex items-center justify-between mb-6">
+       <h1 class="text-2xl font-bold text-white">Sustaina<span class="text-white">Sphere</span></h1>
+
+        <button id="close-btn" class="text-gray-600 hover:text-emerald-500 focus:outline-none text-2xl"></button>
+      </div>
+      <hr class="my-4 border-gray-200">
+
+      <nav class="space-y-4">
+        <a href="/SustainSphere//HTML/PARANOX2.html" class="flex items-center space-x-3 text-white hover:text-emerald-500 transition">
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+    <path d="M3 12l9-9 9 9h-3v9h-12v-9h-3z"/>
+  </svg>
+  <span class="text-white font-semibold">Home</span>
+</a>
+       <a href="#features" class="flex items-center space-x-3 text-white hover:text-emerald-500 transition">
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+    <path d="M12 2a2 2 0 012 2v16a2 2 0 11-4 0V4a2 2 0 012-2z"/>
+    <path d="M6 6h12v2H6z"/>
+  </svg>
+  <span class="text-white font-semibold">Features</span>
+</a>
+
+<a href="#future" class="flex items-center space-x-3 text-white hover:text-emerald-500 transition">
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+    <path d="M12 2l7 12h-4v8h-6v-8H5l7-12z"/>
+  </svg>
+  <span class="text-white font-semibold">Future-Ready</span>
+</a>
+
+<a href="/SustainSphere//HTML/sign out .html" class="flex items-center justify-center space-x-3 bg-emerald-500 text-white text-center px-5 py-3 rounded-lg hover:bg-emerald-600 transition">
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+    <path d="M16 17l5-5-5-5v3H9v4h7v3z"/>
+    <path d="M4 4h8v2H6v12h6v2H4V4z"/>
+  </svg>
+  <span class="text-white font-semibold">Sign Out</span>
+</a>
+
+      </nav>
+    </div>
+  </aside>
+
+ 
+  <div id="overlay" class="fixed inset-0 bg-black/40 backdrop-blur-md hidden z-40"></div>
+
+
+  <main id="main-content" class="mt-24">
+
+    <!-- Features Section -->
+    <section id="features" class="bg-gray-50 min-h-screen flex flex-col items-center justify-center">
+      <div class="container mx-auto px-6 text-center">
+        <div class="mb-12">
+          <h3 class="text-4xl md:text-5xl font-bold mb-6">An Ecosystem for Change</h3>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-10">Integrated features for a holistic approach to sustainability.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-h-[60vh] overflow-y-auto pr-2">
+
+          <!-- Eco-Footprint Tracker -->
+          <div class="feature-card bg-white p-6 rounded-xl shadow-md">
+            <div class="flex items-center justify-center h-12 w-12 rounded-full bg-emerald-100 text-emerald-600 mb-4">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+              </svg>
+            </div>
+            <h4 class="text-xl font-bold mb-2">Eco-Footprint Tracker</h4>
+            <p class="text-gray-600">Monitor your carbon, water, and waste with AI-powered insights and personalized reduction tips.</p>
+            <a href="/SustainSphere/HTML/tracker.html" class="mt-4 inline-block btn-eco">Starts Now</a>
+          </div>
+
+          <!-- Food & Resource Sharing -->
+          <div class="feature-card bg-white p-6 rounded-xl shadow-md">
+            <div class="flex items-center justify-center h-12 w-12 rounded-full bg-emerald-100 text-emerald-600 mb-4">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.1 0-2 .9-2 2s.9 2 2 2 .9-2 2-2-.9-2-2-2zm0-6a10 10 0 00-9.54 7h2.09A8 8 0 0112 4a8 8 0 017.45 5h2.09A10 10 0 0012 2zm0 20a10 10 0 009.54-7h-2.09A8 8 0 0112 20a8 8 0 01-7.45-5H2.46A10 10 0 0012 22z"/>
+              </svg>
+            </div>
+            <h4 class="text-xl font-bold mb-2">Food & Resource Sharing</h4>
+            <p class="text-gray-600">Connect to donate surplus food and share items, with transparent tracking via blockchain.</p>
+            <a href="/SustainSphere/HTML/food.html" class="mt-4 inline-block btn-eco">Share Now</a>
+          </div>
+
+          <!-- Sustainable Shopping Assistant -->
+          <div class="feature-card bg-white p-6 rounded-xl shadow-md">
+            <div class="flex items-center justify-center h-12 w-12 rounded-full bg-sky-100 text-sky-600 mb-4">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+              </svg>
+            </div>
+            <h4 class="text-xl font-bold mb-2">Sustainable Shopping Assistant</h4>
+            <p class="text-gray-600">Scan products to check sustainability scores and discover eco-friendly alternatives instantly.</p>
+            <a href="/SustainSphere/HTML/shopping.html" class="mt-4 inline-block btn-eco">Explore Shopping</a>
+          </div>
+
+          <!-- Smart Energy Management -->
+          <div class="feature-card bg-white p-6 rounded-xl shadow-md">
+            <div class="flex items-center justify-center h-12 w-12 rounded-full bg-yellow-100 text-yellow-600 mb-4">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+              </svg>
+            </div>
+            <h4 class="text-xl font-bold mb-2">Smart Energy Management</h4>
+            <p class="text-gray-600">Integrate with IoT devices to monitor usage, detect leaks, and view community savings impact.</p>
+            <a href="/SustainSphere/HTML/management.html" class="mt-4 inline-block btn-eco">Monitor Energy</a>
+          </div>
+
+          <!-- Learning & Awareness Hub -->
+          <div class="feature-card bg-white p-6 rounded-xl shadow-md">
+            <div class="flex items-center justify-center h-12 w-12 rounded-full bg-purple-100 text-purple-600 mb-4">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+              </svg>
+            </div>
+            <h4 class="text-xl font-bold mb-2">Learning & Awareness Hub</h4>
+            <p class="text-gray-600">Engage in gamified eco-learning, complete daily challenges, and earn Green Credits for your efforts.</p>
+            <a href="/SustainSphere/HTML/learning.html" class="mt-4 inline-block btn-eco">Explore Learning</a>
+          </div>
+
+          <!-- Community Collaboration -->
+          <div class="feature-card bg-white p-6 rounded-xl shadow-md">
+            <div class="flex items-center justify-center h-12 w-12 rounded-full bg-pink-100 text-pink-600 mb-4">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.653-.125-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.653.125-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+              </svg>
+            </div>
+            <h4 class="text-xl font-bold mb-2">Community Collaboration</h4>
+            <p class="text-gray-600">Find local volunteer events, from tree-planting to cleanups, and see social impact in your area.</p>
+            <a href="/SustainSphere/HTML/community.html" class="mt-4 inline-block btn-eco">Explore Community</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Future-Ready Section -->
+    <section id="future" class="bg-white min-h-screen flex items-center justify-center">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+          <h3 class="text-4xl font-bold mb-2">Future-Ready Platform</h3>
+          <p class="text-lg text-gray-600">Pioneering the next wave of sustainability tech (2026 & Beyond).</p>
+        </div>
+        <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
+          <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+            <h4 class="font-bold text-lg mb-2 text-emerald-600">AI Climate Risk Alerts</h4>
+            <p class="text-gray-600">Receive warnings for local climate risks like heatwaves or floods with actionable preparation steps.</p>
+          </div>
+          <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+            <h4 class="font-bold text-lg mb-2 text-emerald-600">Digital Twin of Your Lifestyle</h4>
+            <p class="text-gray-600">Simulate how small changes in diet or transport impact your environmental footprint over time.</p>
+          </div>
+          <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+            <h4 class="font-bold text-lg mb-2 text-emerald-600">Circular Economy Marketplace</h4>
+            <p class="text-gray-600">A dedicated space to buy, sell, and trade reused, repaired, and recycled goods to minimize waste.</p>
+          </div>
+          <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+            <h4 class="font-bold text-lg mb-2 text-emerald-600">Community Climate DAO</h4>
+            <p class="text-gray-600">A decentralized system where users vote on funding and supporting local sustainability projects.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sustainability Tips Section -->
+    <section id="tips" class="h-[50vh] flex flex-col justify-center items-center bg-green-50 text-center px-6">
+      <h2 class="text-2xl md:text-5xl font-bold text-green-700 mb-4">Sustainability Tips</h2>
+      <div id="tipsContainer" class="space-y-8 text-lg text-gray-800"></div>
+      <button id="newTipBtn" class="mt-4 inline-block btn-eco">Show New Tip</button>
+    </section>
+
+<!--  CTA Section -->
+<section id="cta" class="py-20 bg-emerald-600 flex items-center justify-center relative overflow-hidden">
+  <div class="container mx-auto px-6 text-center relative z-10">
+    <h3 class="text-4xl font-bold text-white mb-4">Ready to Make a Difference?</h3>
+    <p class="text-lg text-emerald-100 max-w-2xl mx-auto mb-8">
+      Be the first to know when SustainaSphere launches. Join our waitlist to get early access and exclusive rewards.
+    </p>
+    <form id="waitlistForm" class="max-w-lg mx-auto flex flex-col sm:flex-row gap-4">
+      <input 
+        type="email" 
+        id="waitlistEmail"
+        placeholder="Enter your email" 
+        class="flex-grow p-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-emerald-500" 
+        required
+      >
+      <button 
+        type="submit" 
+        class="bg-white text-emerald-600 font-semibold px-6 py-4 rounded-lg hover:bg-gray-100 transition">
+        Join Waitlist
+      </button>
+    </form>
+  </div>
+
+  <!-- Confetti Canvas -->
+  <canvas id="confettiCanvas" class="absolute inset-0 w-full h-full pointer-events-none"></canvas>
+</section>
+
+<!-- Popup Modal -->
+<div id="popup" class="fixed inset-0 bg-black/50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 z-50">
+  <div id="popupContent" class="bg-white rounded-2xl p-8 text-center max-w-sm mx-auto shadow-2xl border border-emerald-300 scale-90 opacity-0 transition-all duration-300">
+    <h3 id="popupText" class="text-lg font-semibold text-emerald-800 mb-6"></h3>
+    <button id="closePopup" class="bg-emerald-600 text-white px-6 py-2 rounded-lg hover:bg-emerald-700 transition-all">
+      OK
+    </button>
+  </div>
+</div>
+
+    <!-- Footer -->
+<footer class="bg-gray-900 text-gray-200 pt-16 pb-8">
+  <div class="container mx-auto px-6">
+    <div class="grid md:grid-cols-3 gap-8">
+
+     
+<div> 
+    
+  
+    <div class="flex items-center space-x-3 mb-4"> 
+        <img src="/CSS/Sustain.jpg" 
+             alt="Sustainasphere Logo" 
+             class="h-12 w-12 rounded-full object-cover shadow-lg" />
+        
+
+        <h1 class="text-3xl font-bold text-white">
+            Sustaina<span class="text-emerald-500">Sphere</span>
+        </h1>
+        
+    </div>
+
+    <p class="text-gray-400">
+        Empowering individuals and communities to live sustainably, track their impact, and create a greener future together.
+    </p>
+    
+  
+    <div class="flex space-x-4 mt-4">
+        <a href="https://www.facebook.com/" 
+           class="text-gray-400 hover:text-emerald-400 transition">
+           <i class="fab fa-facebook-f mr-1"></i>Facebook
+        </a>
+        <a href="https://twitter.com/" 
+           class="text-gray-400 hover:text-emerald-400 transition">
+           <i class="fab fa-twitter mr-1"></i>Twitter
+        </a>
+        <a href="https://www.instagram.com/" 
+           class="text-gray-400 hover:text-emerald-400 transition">
+           <i class="fab fa-instagram mr-1"></i>Instagram
+        </a>
+    </div>
+
+</div>
+
+       <div>
+        <h3 class="text-xl font-semibold mb-4 text-white">Quick Links</h3>
+        <ul class="space-y-3">
+          <li>
+            <a href="/SustainSphere/HTML/about.html" class="text-gray-400 hover:text-emerald-400 transition-colors">About</a>
+          </li>
+          <li>
+            <a href="/SustainSphere/HTML/contact.html" class="text-gray-400 hover:text-emerald-400 transition-colors">Contact</a>
+          </li>
+            <li>
+            <a href="/SustainSphere/HTML/FAQ.html" class="text-gray-400 hover:text-emerald-400 transition-colors">FAQs</a>
+          </li>
+          </ul>
+      </div>
+
+
+<div>
+  <h3 class="text-xl font-semibold mb-4 text-white">Stay Updated</h3>
+  <p class="text-gray-400 mb-4">Subscribe to our newsletter for eco-tips, events, and platform updates.</p>
+  <form id="subscribeForm" class="flex flex-col sm:flex-row gap-2">
+    <input type="email" placeholder="Your email" class="px-4 py-2 rounded-lg text-gray-800 flex-grow focus:outline-none focus:ring-2 focus:ring-emerald-400" required>
+    <button id="subscribeBtn" type="submit" class="bg-emerald-500 hover:bg-emerald-600 text-white font-semibold px-6 py-2 rounded-lg transition">Subscribe</button>
+  </form>
+</div>
+
+
+<div id="popup" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+  <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+    <h2 class="text-lg font-semibold mb-2">Thank you for subscribing!</h2>
+    <p>You will start receiving updates soon.</p>
+    <button id="closePopup" class="mt-4 px-4 py-2 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600">Close</button>
+  </div>
+</div>
+    </div>
+
+    <hr class="my-8 border-gray-700">
+
+    <p class="text-center text-gray-500 text-sm">
+      &copy; 2025 SustainaSphere. All rights reserved. Building a sustainable future together.
+    </p>
+  </div>
+</footer>
+
+  </main>
+</body>
+<script src="/SustainSphere/JS/main.js"></script>
+</html>

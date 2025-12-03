@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Energy Management – SustainaSphere</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+
+
+  <section class="py-20 bg-white">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-4xl font-bold mb-4">⚡ Smart Energy Management</h2>
+      <p class="text-gray-600 mb-12">
+        Track energy usage, detect anomalies like leaks or wastage, and visualize the community’s overall savings.
+      </p>
+
+    
+      <div id="energy-cards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      
+      </div>
+    </div>
+  </section>
+
+  <script>
+    async function loadEnergyData() {
+      try {
+        const res = await fetch("http://localhost:3000/api/energy");
+        const data = await res.json();
+        const container = document.getElementById("energy-cards");
+
+        container.innerHTML = data.map(device => `
+          <div class="feature-card bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition">
+            <h3 class="text-xl font-semibold mb-2 text-yellow-700">${device.name}</h3>
+            <p class="text-gray-600">Usage: ${device.usage} kWh</p>
+            <p class="text-gray-600">Status: ${device.status}</p>
+            <p class="text-gray-600">Community Savings: ${device.savings}%</p>
+            <button class="mt-4 bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600">View Details</button>
+          </div>
+        `).join("");
+      } catch(err) {
+        console.error("Error loading energy data:", err);
+      }
+    }
+
+    loadEnergyData();
+  </script>
+
+</body>
+</html>

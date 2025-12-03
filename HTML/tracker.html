@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SustainaSphere - AI Eco Tracker</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+  body, html { height: 100%; margin: 0; font-family: 'Inter', sans-serif; }
+  .video-bg {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: -2;
+  }
+  .overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.4);
+    z-index: -1;
+  }
+  .card { border-radius: 1rem; box-shadow: 0 6px 18px rgba(0,0,0,0.2); padding: 1.5rem; background: rgba(255,255,255,0.9); }
+  canvas { max-width: 140px !important; max-height: 140px !important; margin: auto; display: block; }
+  .tip-list li { margin-bottom: 0.75rem; font-size: 0.95rem; }
+</style>
+</head>
+<body class="min-h-screen relative">
+
+<video autoplay muted loop class="video-bg">
+  <source src="https://www.pexels.com/download/video/6981411/" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<div class="overlay"></div>
+
+<header class="bg-bg-dark Green-100 fixed top-0 left-0 right-0 z-50 shadow-sm to-teal-500 text-white p-6 text-center font-bold text-2xl md:text-3xl relative z-10">
+SustainaSphere AI Eco Tracker
+</header>
+
+<section class="container mx-auto py-6 px-4 relative z-10">
+
+<div class="grid md:grid-cols-3 gap-6 mb-6 text-center">
+
+
+  <div class="card bg-white/20 backdrop-blur-lg border border-white/30 text-white">
+    <canvas id="carbonChart"></canvas>
+    <p class="mt-3 font-bold text-green-400 text-lg" id="carbonCounter">0 kg</p>
+    <span class="text-gray-200 text-sm">Carbon Emission</span>
+  </div>
+
+  <div class="card bg-white/20 backdrop-blur-lg border border-white/30 text-white">
+    <canvas id="waterChart"></canvas>
+    <p class="mt-3 font-bold text-blue-400 text-lg" id="waterCounter">0 L</p>
+    <span class="text-gray-200 text-sm">Water Usage</span>
+  </div>
+
+
+  <div class="card bg-white/20 backdrop-blur-lg border border-white/30 text-white">
+    <canvas id="wasteChart"></canvas>
+    <p class="mt-3 font-bold text-red-400 text-lg" id="wasteCounter">0 kg</p>
+    <span class="text-gray-200 text-sm">Waste Produced</span>
+  </div>
+</div>
+
+  <div class="grid md:grid-cols-2 gap-6">
+
+<div class="card bg-white/20 backdrop-blur-lg border border-white/30 text-white">
+  <h2 class="text-lg font-bold text-teal-400 mb-4">Log Daily Activity</h2>
+  <form id="trackerForm" class="grid grid-cols-1 gap-3">
+    <input type="number" id="carbonInput" placeholder="Carbon (kg)" 
+           class="border border-white/40 bg-white/10 text-white p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400">
+    <input type="number" id="waterInput" placeholder="Water (L)" 
+           class="border border-white/40 bg-white/10 text-white p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400">
+    <input type="number" id="wasteInput" placeholder="Waste (kg)" 
+           class="border border-white/40 bg-white/10 text-white p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400">
+    <button type="submit" 
+            class="bg-gradient-to-r from-green-400 to-teal-500 text-white p-2 rounded-lg hover:from-green-500 hover:to-teal-600 transition">
+      Track Now
+    </button>
+  </form>
+  <p id="result" class="mt-2 text-gray-200 text-sm"></p>
+</div>
+
+
+
+<div class="card bg-white/20 backdrop-blur-lg border border-white/30 text-white">
+  <h2 class="text-lg font-bold text-teal-400 mb-4">AI-Powered Reduction Tips</h2>
+  <ul id="tipsList" class="tip-list list-disc list-inside"></ul>
+</div>
+
+</section>
+
+<script>
+function getData(){ const data = JSON.parse(localStorage.getItem('footprintData')); return data || { carbon: 50, water: 40, waste: 30 }; }
+function saveData(data){ localStorage.setItem('footprintData', JSON.stringify(data)); }
+
+let carbonChart = new Chart(document.getElementById('carbonChart'), { type: 'doughnut', data: { labels:['Used','Remaining'], datasets:[{ data:[0,100], backgroundColor:['#10B981','#D1FAE5'] }] }, options: { cutout:'70%', plugins:{ legend:{ display:false } } } });
+let waterChart = new Chart(document.getElementById('waterChart'), { type: 'doughnut', data: { labels:['Used','Remaining'], datasets:[{ data:[0,100], backgroundColor:['#3B82F6','#DBEAFE'] }] }, options: { cutout:'70%', plugins:{ legend:{ display:false } } } });
+let wasteChart = new Chart(document.getElementById('wasteChart'), { type: 'doughnut', data: { labels:['Used','Remaining'], datasets:[{ data:[0,100], backgroundColor:['#EF4444','#FEE2E2'] }] }, options: { cutout:'70%', plugins:{ legend:{ display:false } } } });
+
+
+function updateUI(data){
+  carbonChart.data.datasets[0].data = [data.carbon, 200 - data.carbon]; carbonChart.update();
+  waterChart.data.datasets[0].data = [data.water, 200 - data.water]; waterChart.update();
+  wasteChart.data.datasets[0].data = [data.waste, 200 - data.waste]; wasteChart.update();
+
+  document.getElementById('carbonCounter').innerText = data.carbon + ' kg';
+  document.getElementById('waterCounter').innerText = data.water + ' L';
+  document.getElementById('wasteCounter').innerText = data.waste + ' kg';
+
+  generateTips(data);
+}
+
+/* --- AI Powered Tips --- */
+function generateTips(data){
+  const tips = [];
+  if(data.carbon>70) tips.push("🚶‍♂️ Walk, bike, or take public transport.");
+  if(data.carbon>40 && data.carbon<=70) tips.push("Reduce energy or meat consumption.");
+  if(data.water>60) tips.push(" Short showers, efficient taps.");
+  if(data.water>30 && data.water<=60) tips.push("Reuse water and collect rainwater.");
+  if(data.waste>50) tips.push("Recycle plastics and compost.");
+  if(data.waste>20 && data.waste<=50) tips.push(" Minimize packaging waste.");
+  if(data.carbon<30 && data.water<30 && data.waste<30) tips.push("Excellent! Low environmental footprint.");
+
+  const tipsList = document.getElementById('tipsList');
+  tipsList.innerHTML = '';
+  tips.slice(0,4).forEach(tip => { tipsList.innerHTML += `<li>${tip}</li>`; });
+}
+
+document.getElementById('trackerForm').addEventListener('submit', e=>{
+  e.preventDefault();
+  const carbon = parseInt(document.getElementById('carbonInput').value);
+  const water = parseInt(document.getElementById('waterInput').value);
+  const waste = parseInt(document.getElementById('wasteInput').value);
+
+  const data = getData();
+  data.carbon += carbon;
+  data.water += water;
+  data.waste += waste;
+
+  saveData(data);
+  updateUI(data);
+
+  document.getElementById('result').innerText = `Logged: Carbon ${carbon}kg, Water ${water}L, Waste ${waste}kg`;
+  e.target.reset();
+});
+
+
+updateUI(getData());
+</script>
+
+</body>
+</html>

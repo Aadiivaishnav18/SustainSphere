@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Become a Community Member</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="relative min-h-screen flex items-center justify-center overflow-hidden">
+
+  
+  <video autoplay muted loop class="absolute w-auto min-w-full min-h-full max-w-none object-cover -z-10">
+    <source src="https://www.pexels.com/download/video/6436164/" type="video/mp4">
+    Your browser does not support HTML5 video.
+  </video>
+
+  
+  <div class="absolute inset-0 bg-green-900 bg-opacity-30 -z-5"></div>
+
+
+  <div class="bg-white bg-opacity-60 backdrop-blur-md p-8 md:p-12 rounded-2xl shadow-xl w-full max-w-md mx-4">
+    <h2 class="text-3xl font-extrabold text-center text-green-700 mb-4">
+      Join Our Community
+    </h2>
+    <p class="text-center text-green-800 mb-6">
+      Become a member and contribute to sustainability initiatives!
+    </p>
+    
+    <form id="memberForm" class="space-y-5">
+      <div>
+        <label for="name" class="block mb-1 font-medium text-green-700">Full Name</label>
+        <input type="text" id="name" placeholder="John Doe" class="w-full p-3 rounded-lg border border-green-300 focus:outline-none focus:ring-2 focus:ring-green-400">
+      </div>
+
+      <div>
+        <label for="email" class="block mb-1 font-medium text-green-700">Email</label>
+        <input type="email" id="email" placeholder="you@example.com" class="w-full p-3 rounded-lg border border-green-300 focus:outline-none focus:ring-2 focus:ring-green-400">
+      </div>
+
+      <div>
+        <label for="phone" class="block mb-1 font-medium text-green-700">Phone Number</label>
+        <input type="tel" id="phone" placeholder="+91 9876543210" class="w-full p-3 rounded-lg border border-green-300 focus:outline-none focus:ring-2 focus:ring-green-400">
+      </div>
+      
+      <div>
+        <label for="interest" class="block mb-1 font-medium text-green-700">Area of Interest</label>
+        <select id="interest" class="w-full p-3 rounded-lg border border-green-300 focus:outline-none focus:ring-2 focus:ring-green-400">
+          <option value="">Select</option>
+          <option>Recycling</option>
+          <option>Community Gardening</option>
+          <option>Clean Energy</option>
+          <option>Environmental Awareness</option>
+        </select>
+      </div>
+      
+      <button type="submit" class="w-full bg-green-600 text-white font-bold py-3 rounded-lg hover:bg-green-700 transition">
+        Become a Member
+      </button>
+    </form>
+
+ 
+    <p id="successMessage" class="hidden text-center text-green-900 mt-4 font-semibold">
+      Thank you! You are now a community member.
+    </p>
+  </div>
+
+  <script>
+    const form = document.getElementById('memberForm');
+    const successMessage = document.getElementById('successMessage');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const interest = document.getElementById('interest').value;
+
+  
+      if (!name || !email || !phone || !interest) {
+        alert('Please fill all fields.');
+        return;
+      }
+
+   
+      const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+      if (!email.match(emailPattern)) {
+        alert('Please enter a valid email.');
+        return;
+      }
+      const phonePattern = /^\+?\d{10,15}$/;
+      if (!phone.match(phonePattern)) {
+        alert('Please enter a valid phone number.');
+        return;
+      }
+
+      
+      successMessage.classList.remove('hidden');
+
+      
+      form.reset();
+    });
+  </script>
+
+</body>
+</html>

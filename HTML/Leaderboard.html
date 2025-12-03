@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SustainaSphere – Learning & Awareness Hub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+
+<section id="achievements" class="bg-emerald-50 py-16 relative">
+  <div class="container mx-auto px-6 text-center">
+  
+    <h2 class="text-3xl font-bold text-gray-800 mb-4">Achievements & Badges</h2>
+    <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-12">
+      Unlock special badges as you complete eco-challenges, earn Green Credits, 
+      and grow as a sustainability champion 
+    </p>
+
+   
+    <div class="mb-12">
+      <p class="font-semibold text-gray-700">Your Green Credits: 
+        <span id="credits" class="text-emerald-600 font-bold">0</span>
+      </p>
+      <div class="w-full bg-gray-200 rounded-full h-4 mt-3">
+        <div id="progress-bar" class="bg-emerald-500 h-4 rounded-full transition-all duration-500 ease-out" style="width: 0%;"></div>
+      </div>
+    </div>
+
+   
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8" id="badges">
+
+      <div class="badge bg-white rounded-xl shadow-lg p-6 transition transform">
+        <div class="text-4xl mb-3"></div>
+        <h3 class="font-semibold text-gray-800">Earth Guardian</h3>
+        <p class="text-gray-600 text-sm mt-2">Complete your first eco challenge.</p>
+        <span class="status mt-3 inline-block px-3 py-1 text-xs font-semibold rounded-full">Locked </span>
+      </div>
+
+      <div class="badge bg-white rounded-xl shadow-lg p-6 transition transform">
+        <div class="text-4xl mb-3"></div>
+        <h3 class="font-semibold text-gray-800">Recycler Pro</h3>
+        <p class="text-gray-600 text-sm mt-2">Recycle consistently for 7 days.</p>
+        <span class="status mt-3 inline-block px-3 py-1 text-xs font-semibold rounded-full">Locked </span>
+      </div>
+
+      <div class="badge bg-white rounded-xl shadow-lg p-6 transition transform">
+        <div class="text-4xl mb-3"></div>
+        <h3 class="font-semibold text-gray-800">Streak Master</h3>
+        <p class="text-gray-600 text-sm mt-2">Maintain a 14-day challenge streak.</p>
+        <span class="status mt-3 inline-block px-3 py-1 text-xs font-semibold rounded-full">Locked </span>
+      </div>
+
+      <div class="badge bg-white rounded-xl shadow-lg p-6 transition transform">
+        <div class="text-4xl mb-3"></div>
+        <h3 class="font-semibold text-gray-800">Eco Champion</h3>
+        <p class="text-gray-600 text-sm mt-2">Earn 1000+ Green Credits.</p>
+        <span class="status mt-3 inline-block px-3 py-1 text-xs font-semibold rounded-full">Locked </span>
+      </div>
+    </div>
+
+   
+    <div class="mt-10 flex justify-center gap-4">
+      <button onclick="addCredits(100)" class="bg-emerald-600 text-white px-5 py-2 rounded-lg shadow hover:bg-emerald-700">+100 Credits</button>
+      <button onclick="addCredits(500)" class="bg-emerald-500 text-white px-5 py-2 rounded-lg shadow hover:bg-emerald-600">+500 Credits</button>
+      <button onclick="addCredits(1000)" class="bg-emerald-400 text-white px-5 py-2 rounded-lg shadow hover:bg-emerald-500">+1000 Credits</button>
+    </div>
+  </div>
+
+  <div id="popup" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center hidden z-50">
+    <div class="bg-white rounded-2xl shadow-xl p-8 text-center max-w-sm animate-bounce">
+      <h2 class="text-2xl font-bold text-emerald-600 mb-3">🎉 Congratulations!</h2>
+      <p id="popup-text" class="text-gray-700 mb-5">You unlocked a badge!</p>
+      <button onclick="closePopup()" class="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700">Awesome!</button>
+    </div>
+  </div>
+</section>
+
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+let credits = 0;
+const badges = [
+  { requirement: 100, element: null, name: "Earth Guardian" },
+  { requirement: 300, element: null, name: "Recycler Pro" },
+  { requirement: 600, element: null, name: "Streak Master" },
+  { requirement: 1000, element: null, name: "Eco Champion" }
+];
+
+
+document.querySelectorAll("#badges .badge").forEach((badge, i) => {
+  badges[i].element = badge;
+  lockBadge(badge);
+});
+
+
+function lockBadge(badge) {
+  badge.classList.add("opacity-40", "blur-[1px]");
+  const status = badge.querySelector(".status");
+  status.textContent = "Locked 🔒";
+  status.className = "status mt-3 inline-block px-3 py-1 text-xs font-semibold bg-gray-200 text-gray-500 rounded-full";
+}
+
+
+function unlockBadge(badge, name) {
+  badge.classList.remove("opacity-40", "blur-[1px]");
+  badge.classList.add("scale-105", "shadow-2xl", "ring-4", "ring-emerald-300");
+
+  const status = badge.querySelector(".status");
+  status.textContent = "Unlocked ✅";
+  status.className = "status mt-3 inline-block px-3 py-1 text-xs font-semibold bg-emerald-100 text-emerald-600 rounded-full";
+
+
+  confetti({
+    particleCount: 100,
+    spread: 70,
+    origin: { y: 0.6 }
+  });
+
+
+  document.getElementById("popup-text").textContent = `You unlocked the "${name}" badge! 🎉`;
+  document.getElementById("popup").classList.remove("hidden");
+}
+
+
+function closePopup() {
+  document.getElementById("popup").classList.add("hidden");
+}
+
+
+function addCredits(amount) {
+  credits += amount;
+  document.getElementById("credits").textContent = credits;
+
+
+  const percent = Math.min((credits / 1000) * 100, 100);
+  document.getElementById("progress-bar").style.width = percent + "%";
+
+
+  badges.forEach(b => {
+    if (credits >= b.requirement && b.element.querySelector(".status").textContent.includes("Locked")) {
+      unlockBadge(b.element, b.name);
+    }
+  });
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learning Resources – SustainaSphere</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(to right, #ecfdf5, #d1fae5);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .resource-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    .resource-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    }
+    .completed {
+      background-color: #bbf7d0 !important;
+      border-color: #34d399 !important;
+    }
+  </style>
+</head>
+<body class="p-6">
+
+  <div class="max-w-4xl mx-auto bg-white p-8 rounded-2xl shadow-xl">
+    <h1 class="text-4xl font-bold text-center text-emerald-600 mb-6">📖 Learning Resources</h1>
+    <p class="text-center text-gray-600 mb-10">Explore guides, videos, and interactive tools to boost your eco-knowledge.</p>
+    
+    <div id="resource-container" class="grid grid-cols-1 md:grid-cols-2 gap-8"></div>
+
+    <div class="text-center mt-10">
+      <button onclick="resetResources()" class="bg-gradient-to-r from-emerald-500 to-green-600 text-white px-6 py-3 rounded-xl hover:opacity-90 shadow-md">
+        Reset Progress
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const resources = [
+      { type: " Guide", title: "Beginner's Guide to Sustainability", link: "https://www.un.org/sustainabledevelopment/sustainable-development-goals/" },
+      { type: " Guide", title: "Climate Change Basics", link: "https://climate.nasa.gov/resources/education/" },
+      { type: " Video", title: "What is Renewable Energy?", link: "https://www.youtube.com/watch?v=1kUE0BZtTRc" },
+      { type: " Video", title: "Reduce, Reuse, Recycle Explained", link: "https://www.youtube.com/watch?v=OasbYWF4_S8" },
+      { type: " Tool", title: "Carbon Footprint Calculator", link: "https://www.footprintcalculator.org/" },
+      { type: " Tool", title: "Energy Savings Estimator", link: "https://energy.gov/energysaver/energy-saver" },
+      { type: " Guide", title: "Water Conservation Tips", link: "https://www.epa.gov/watersense/start-saving" },
+      { type: " Video", title: "Sustainable Living Tips", link: "https://www.youtube.com/watch?v=EhKZ7WcQW9Q" }
+    ];
+
+    const container = document.getElementById("resource-container");
+
+    
+    resources.forEach((res, index) => {
+      const card = document.createElement("div");
+      card.classList.add("resource-card", "bg-emerald-50", "p-6", "rounded-xl", "shadow-md", "border", "border-emerald-200");
+
+      const title = document.createElement("h3");
+      title.classList.add("text-lg", "font-semibold", "mb-2");
+      title.textContent = `${res.type} - ${res.title}`;
+
+      const btn = document.createElement("button");
+      btn.textContent = "Open Resource";
+      btn.classList.add("mt-3", "bg-gradient-to-r", "from-emerald-500", "to-green-600", "text-white", "px-4", "py-2", "rounded-lg", "hover:opacity-90", "shadow-md");
+
+      btn.addEventListener("click", () => {
+        window.open(res.link, "_blank");
+        card.classList.add("completed");
+      });
+
+      card.appendChild(title);
+      card.appendChild(btn);
+      container.appendChild(card);
+    });
+
+    function resetResources() {
+      document.querySelectorAll(".resource-card").forEach(card => {
+        card.classList.remove("completed");
+      });
+    }
+  </script>
+</body>
+</html>

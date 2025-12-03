@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learning Resource</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="p-6">
+
+
+<!-- Learning Content Section -->
+<section id="eco-lessons" class="bg-white py-16">
+  <div class="container mx-auto px-6 max-w-4xl">
+    <h2 class="text-4xl font-extrabold text-gray-800 text-center mb-12">
+      <span class="text-emerald-600">📚</span> Eco-Learning Hub
+    </h2>
+    
+    
+    <div class="space-y-6">
+      
+      <!-- Lesson 1: Climate Change Basics -->
+      <div class="bg-emerald-50 p-6 rounded-xl shadow-lg border-l-4 border-emerald-500 hover:shadow-xl transition duration-200">
+        <button class="w-full text-left flex justify-between items-center" onclick="toggleLesson('lesson1')">
+          <h3 class="text-xl font-semibold text-gray-800">🌡 Climate Change Basics</h3>
+          <span id="indicator-lesson1" class="text-emerald-600 text-2xl font-bold transition duration-200">+</span>
+        </button>
+        <div id="lesson1" class="hidden mt-4 text-gray-700 leading-relaxed border-t border-emerald-200 pt-3">
+          <p>Climate change refers to long-term shifts in temperatures and weather patterns, mainly caused by human activities like burning fossil fuels. These actions increase greenhouse gases, trapping heat in the atmosphere and raising global temperatures.</p>
+          <p class="mt-3 font-semibold text-sm bg-emerald-100 p-2 rounded-lg inline-block"> Why it matters: It leads to rising sea levels, extreme weather events, and biodiversity loss.</p>
+        </div>
+      </div>
+
+      <!-- Lesson 2: Waste Management & Recycling -->
+      <div class="bg-emerald-50 p-6 rounded-xl shadow-lg border-l-4 border-emerald-500 hover:shadow-xl transition duration-200">
+        <button class="w-full text-left flex justify-between items-center" onclick="toggleLesson('lesson2')">
+          <h3 class="text-xl font-semibold text-gray-800"> Waste Management & Recycling</h3>
+          <span id="indicator-lesson2" class="text-emerald-600 text-2xl font-bold transition duration-200">+</span>
+        </button>
+        <div id="lesson2" class="hidden mt-4 text-gray-700 leading-relaxed border-t border-emerald-200 pt-3">
+          <p>The *3Rs – Reduce, Reuse, Recycle* – help minimize waste. Recycling everyday items like plastic bottles, paper, and aluminum cans saves resources and reduces pollution.</p>
+          <p class="mt-3 font-semibold text-sm bg-emerald-100 p-2 rounded-lg inline-block">Try this: Keep a separate bin for recyclables at home.</p>
+        </div>
+      </div>
+      
+      <!-- Lesson 3: Energy Conservation -->
+      <div class="bg-emerald-50 p-6 rounded-xl shadow-lg border-l-4 border-emerald-500 hover:shadow-xl transition duration-200">
+        <button class="w-full text-left flex justify-between items-center" onclick="toggleLesson('lesson3')">
+          <h3 class="text-xl font-semibold text-gray-800"> Energy Conservation</h3>
+          <span id="indicator-lesson3" class="text-emerald-600 text-2xl font-bold transition duration-200">+</span>
+        </button>
+        <div id="lesson3" class="hidden mt-4 text-gray-700 leading-relaxed border-t border-emerald-200 pt-3">
+          <p>Using renewable energy sources like solar and wind reduces greenhouse gas emissions. Small actions like switching off lights, using LED bulbs, and unplugging devices save energy and money.</p>
+          <p class="mt-3 font-semibold text-sm bg-emerald-100 p-2 rounded-lg inline-block">☀ Tip: Investigate switching to a green energy provider!</p>
+        </div>
+      </div>
+
+      <!-- NEW Lesson 4: Water Conservation -->
+      <div class="bg-emerald-50 p-6 rounded-xl shadow-lg border-l-4 border-emerald-500 hover:shadow-xl transition duration-200">
+        <button class="w-full text-left flex justify-between items-center" onclick="toggleLesson('lesson4')">
+          <h3 class="text-xl font-semibold text-gray-800"> Water Conservation at Home</h3>
+          <span id="indicator-lesson4" class="text-emerald-600 text-2xl font-bold transition duration-200">+</span>
+        </button>
+        <div id="lesson4" class="hidden mt-4 text-gray-700 leading-relaxed border-t border-emerald-200 pt-3">
+          <p>Fresh water is a finite resource. Simple practices like taking shorter showers, fixing leaky faucets immediately, and installing low-flow fixtures can drastically reduce your household water footprint.</p>
+          <p class="mt-3 font-semibold text-sm bg-emerald-100 p-2 rounded-lg inline-block">🚿 Challenge: Aim for a 5-minute shower this week!</p>
+        </div>
+      </div>
+
+      <!-- NEW Lesson 5: Sustainable Food Choices -->
+      <div class="bg-emerald-50 p-6 rounded-xl shadow-lg border-l-4 border-emerald-500 hover:shadow-xl transition duration-200">
+        <button class="w-full text-left flex justify-between items-center" onclick="toggleLesson('lesson5')">
+          <h3 class="text-xl font-semibold text-gray-800"> Sustainable Food Choices</h3>
+          <span id="indicator-lesson5" class="text-emerald-600 text-2xl font-bold transition duration-200">+</span>
+        </button>
+        <div id="lesson5" class="hidden mt-4 text-gray-700 leading-relaxed border-t border-emerald-200 pt-3">
+          <p>The food we eat has a massive impact. Choosing locally sourced, seasonal produce, reducing meat consumption (especially beef), and minimizing food waste are powerful ways to lower your carbon and water footprint.</p>
+          <p class="mt-3 font-semibold text-sm bg-emerald-100 p-2 rounded-lg inline-block">🥩 Focus: Try one meatless meal per day.</p>
+        </div>
+      </div>
+      
+    </div>
+
+
+     
+    <div class="mt-16 pt-12 border-t border-gray-200">
+      <h2 class="text-3xl font-bold text-center text-emerald-600 mb-8">📚 Recommended Reading</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+        
+        <!-- Resource 1: Book -->
+        <div class="p-4 bg-gray-50 rounded-xl shadow-md border-t-2 border-emerald-400">
+          <p class="text-5xl mb-3"></p>
+          <h4 class="font-bold text-lg text-gray-800">The Uninhabitable Earth</h4>
+          <p class="text-sm text-gray-600 mb-2">by David Wallace-Wells</p>
+          <a href="/CSS/The Uninhabitable Earth Life After Warming (David Wallace-Wells) (Z-Library).pdf" class="text-emerald-500 hover:underline text-sm font-medium">Find on Amazon</a>
+        </div>
+        
+        <!-- Resource 2: Novel -->
+        <div class="p-4 bg-gray-50 rounded-xl shadow-md border-t-2 border-emerald-400">
+          <p class="text-5xl mb-3"></p>
+          <h4 class="font-bold text-lg text-gray-800">The Overstory (Novel)</h4>
+          <p class="text-sm text-gray-600 mb-2">by Richard Powers</p>
+          <a href="/CSS/The Overstory A Novel (Richard Powers [Powers, Richard]) (Z-Library).pdf" class="text-emerald-500 hover:underline text-sm font-medium">Find on Amazon</a>
+        </div>
+        
+        <!-- Resource 3: Educational Site -->
+        <div class="p-4 bg-gray-50 rounded-xl shadow-md border-t-2 border-emerald-400">
+          <p class="text-5xl mb-3"></p>
+          <h4 class="font-bold text-lg text-gray-800">Project Drawdown</h4>
+          <p class="text-sm text-gray-600 mb-2">Website & Research</p>
+          <a href="https://drawdown.org/" class="text-emerald-500 hover:underline text-sm font-medium">Visit Website</a>
+        </div>
+      </div>
+    </div>
+
+   </div>
+  </section>
+
+
+  <script>
+  function toggleLesson(id) {
+  const content = document.getElementById(id);
+  const indicator = document.getElementById('indicator-' + id);
+  
+ 
+  content.classList.toggle("hidden");
+  
+ 
+  if (content.classList.contains("hidden")) {
+    indicator.textContent = "+";
+  } else {
+    indicator.textContent = "−"; 
+  }
+}
+</script>
+</body>
+</html>

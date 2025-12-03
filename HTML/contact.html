@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us – SustainaSphere</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-50 text-gray-800 font-inter">
+
+  <!-- Header -->
+  <header class="bg-green-100 fixed top-0 left-0 right-0 z-50 shadow-sm">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-gray-800">
+        Sustaina<span class="text-emerald-500">Sphere</span>
+      </h1>
+      <a href="/SustainSphere/HTML/PARANOX2.html" class="bg-emerald-500 text-white font-semibold px-6 py-2 rounded-lg hover:bg-emerald-600 transition">
+        Home
+      </a>
+    </div>
+  </header>
+
+  <!-- Contact Section -->
+  <section class="pt-32 pb-20">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold mb-4">Get in Touch</h2>
+        <p class="text-lg text-gray-600">We’d love to hear from you! Whether you have questions, ideas, or want to collaborate.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-10">
+        
+        <!-- Contact Form -->
+        <form class="bg-white p-8 rounded-xl shadow-lg">
+          <div class="mb-4">
+            <label class="block text-sm font-semibold mb-2">Name</label>
+            <input type="text" placeholder="Your Name" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-emerald-400">
+          </div>
+          <div class="mb-4">
+            <label class="block text-sm font-semibold mb-2">Email</label>
+            <input type="email" placeholder="Your Email" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-emerald-400">
+          </div>
+          <div class="mb-4">
+            <label class="block text-sm font-semibold mb-2">Message</label>
+            <textarea rows="5" placeholder="Write your message..." class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-emerald-400"></textarea>
+          </div>
+          <button type="submit" class="w-full bg-emerald-500 text-white py-3 rounded-lg font-semibold hover:bg-emerald-600 transition">Send Message</button>
+        </form>
+
+        <!-- Contact Info -->
+        <div class="flex flex-col justify-center bg-emerald-50 p-8 rounded-xl shadow-inner">
+          <h3 class="text-2xl font-bold mb-4">Reach Us Directly</h3>
+          <p class="mb-4"><strong>Email:</strong> support@sustainasphere.com</p>
+          <p class="mb-4"><strong>Phone:</strong> +91 98765 43210</p>
+          <p class="mb-4"><strong>Address:</strong> GreenTech Park, Jaipur, India</p>
+          <p class="text-gray-600">Follow us on social media to stay updated </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-6 text-center">
+    <p>&copy; 2025 SustainaSphere. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+ 
+  const contactForm = document.querySelector("form");
+  const nameInput = contactForm.querySelector('input[type="text"]');
+  const emailInput = contactForm.querySelector('input[type="email"]');
+  const messageInput = contactForm.querySelector('textarea');
+
+
+  const popup = document.createElement("div");
+  popup.id = "contactPopup";
+  popup.className = "fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-50";
+  popup.innerHTML = `
+    <div class="bg-white p-6 rounded-lg shadow-lg text-center max-w-sm w-full transform scale-90 opacity-0 transition-all duration-300" id="contactPopupContent">
+      <h2 class="text-lg font-semibold mb-2" id="popupTitle">Thank you!</h2>
+      <p id="popupMsg">Your message has been sent successfully.</p>
+      <button id="closePopupBtn" class="mt-4 px-4 py-2 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600">OK</button>
+    </div>
+    <canvas id="confettiCanvas" class="absolute top-0 left-0 w-full h-full pointer-events-none"></canvas>
+  `;
+  document.body.appendChild(popup);
+
+  const popupContent = document.getElementById("contactPopupContent");
+  const popupTitle = document.getElementById("popupTitle");
+  const popupMsg = document.getElementById("popupMsg");
+  const closePopupBtn = document.getElementById("closePopupBtn");
+  const confettiCanvas = document.getElementById("confettiCanvas");
+  const ctx = confettiCanvas.getContext("2d");
+  let confetti = [];
+
+
+  function resizeCanvas() {
+    confettiCanvas.width = window.innerWidth;
+    confettiCanvas.height = window.innerHeight;
+  }
+  window.addEventListener("resize", resizeCanvas);
+  resizeCanvas();
+
+ 
+  function createConfetti() {
+    for (let i = 0; i < 100; i++) {
+      confetti.push({
+        x: Math.random() * confettiCanvas.width,
+        y: Math.random() * confettiCanvas.height - confettiCanvas.height,
+        r: Math.random() * 6 + 2,
+        d: Math.random() * 1 + 0.5,
+        color: `hsl(${Math.random() * 360}, 70%, 50%)`,
+      });
+    }
+  }
+
+  function drawConfetti() {
+    ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+    confetti.forEach(c => {
+      ctx.beginPath();
+      ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2);
+      ctx.fillStyle = c.color;
+      ctx.fill();
+      c.y += c.d * 3;
+      if (c.y > confettiCanvas.height) c.y = -10;
+    });
+  }
+
+  function startConfetti() {
+    confetti = [];
+    createConfetti();
+    const duration = 3000;
+    const start = Date.now();
+    function animate() {
+      if (Date.now() - start < duration) {
+        drawConfetti();
+        requestAnimationFrame(animate);
+      } else {
+        ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+      }
+    }
+    animate();
+  }
+
+
+  function showPopup(title, msg) {
+    popupTitle.textContent = title;
+    popupMsg.textContent = msg;
+    popup.classList.remove("hidden");
+    setTimeout(() => {
+      popupContent.classList.remove("scale-90", "opacity-0");
+      popupContent.classList.add("scale-100", "opacity-100");
+    }, 10);
+    startConfetti();
+  }
+
+  function hidePopup() {
+    popupContent.classList.remove("scale-100", "opacity-100");
+    popupContent.classList.add("scale-90", "opacity-0");
+    setTimeout(() => {
+      popup.classList.add("hidden");
+    }, 300);
+  }
+
+  closePopupBtn.addEventListener("click", hidePopup);
+  popup.addEventListener("click", (e) => {
+    if (e.target === popup) hidePopup();
+  });
+
+
+  contactForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const name = nameInput.value.trim();
+    const email = emailInput.value.trim();
+    const message = messageInput.value.trim();
+
+    if (!name) return alert("Please enter your name.");
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return alert("Please enter a valid email.");
+    if (!message) return alert("Please write your message.");
+
+    showPopup("🎉 Thank you for contacting us!", `Hi ${name}, your message has been sent successfully.`);
+    contactForm.reset();
+  });
+
+  
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("fade-in-element");
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll("section, form, .flex.flex-col").forEach(el => observer.observe(el));
+});
+
+</script>

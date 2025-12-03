@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>More Transparent Smart Energy Management Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+       
+        .glass-card {
+            
+            background-color: transparent; 
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+         
+            background-color: transparent rgba(132, 98, 98, 0.34);
+            box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.15), 0 6px 10px -4px rgba(0, 0, 0, 0.1);
+        }
+        .monitor-panel {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .monitor-panel.active {
+            display: block;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-green-50 font-sans">
+    
+    <div class="max-w-7xl mx-auto py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
+        
+        <header class="text-center mb-10 sm:mb-14">
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-gray-800 leading-tight">
+                Smart Energy Management
+            </h1>
+            <p class="mt-2 sm:mt-3 text-base sm:text-lg text-gray-600">
+                Integrate with IoT devices, monitor usage, detect leaks, and view your community impact.
+            </p>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-10">
+
+            <div class="glass-card p-5 rounded-xl border-t-4 border-indigo-500 flex flex-col justify-between">
+                <div>
+                    <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-3">Current Usage Snapshot</h2>
+                    <div class="text-4xl font-extrabold text-indigo-600 mb-1">
+                        <span id="current-kwh">0.00</span> kW
+                    </div>
+                    <p class="text-xs text-gray-500 mb-4">Live Reading (Last Second)</p>
+                </div>
+                <div class="pt-4 border-t border-gray-200">
+                    <div class="flex justify-between items-center text-sm font-medium text-gray-700">
+                        <span>Daily Total:</span>
+                        <span id="daily-total" class="font-bold">0.0 kWh</span>
+                    </div>
+                    <div class="flex justify-between items-center text-sm font-medium text-gray-700 mt-1">
+                        <span>Projected Bill:</span>
+                        <span id="projected-bill" class="font-bold text-green-700">$0.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="leak-card" class="glass-card p-5 rounded-xl border-t-4 border-green-500 transition duration-300 flex flex-col justify-between">
+                <div>
+                    <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-3">System Status & Alerts</h2>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <svg id="status-icon" class="w-7 h-7 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <p id="status-message" class="text-base font-medium text-green-600">All Systems Normal</p>
+                    </div>
+                </div>
+                <button onclick="simulateLeak()" class="self-start text-sm text-indigo-500 hover:text-indigo-700 font-medium transition duration-300 underline mt-4 pt-3 border-t border-gray-200 w-full text-left">
+                    (Click to Simulate Leak Alert)
+                </button>
+            </div>
+
+            <div class="glass-card p-5 rounded-xl border-t-4 border-purple-500 flex flex-col justify-between">
+                <div>
+                    <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-3">Community Impact</h2>
+                    <div class="text-4xl font-extrabold text-purple-600 mb-1">
+                        <span id="co2-reduction">5.8</span> Tons
+                    </div>
+                    <p class="text-xs text-gray-500 mb-4">CO₂ Reduced This Month</p>
+                </div>
+                <div class="pt-4 border-t border-gray-200">
+                    <div class="flex justify-between items-center text-sm font-medium text-gray-700">
+                        <span>Top Saver:</span>
+                        <span class="font-bold">Unit 101</span>
+                    </div>
+                    <div class="flex justify-between items-center text-sm font-medium text-gray-700 mt-1">
+                        <span>Community Goal:</span>
+                        <span class="font-bold text-purple-700">75% Achieved</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="text-center mb-10">
+            <button id="monitor-button" onclick="toggleMonitorPanel()" class="bg-indigo-600 text-white font-semibold py-3 px-8 rounded-full text-lg hover:bg-indigo-700 transition duration-300 shadow-xl focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50">
+                Monitor Energy
+            </button>
+        </div>
+
+        <div id="advanced-monitor-panel" class="monitor-panel">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Real-Time Consumption Graph</h2>
+            
+            <div class="glass-card p-4 sm:p-6 rounded-xl mb-8">
+                <div class="h-64 sm:h-96 w-full">
+                    <canvas id="usageChart"></canvas>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                
+                <div class="glass-card p-5 rounded-xl border-t-4 border-blue-500">
+                    <h3 class="text-xl font-semibold mb-4">IoT Device Control</h3>
+                    <p class="text-sm text-gray-600 mb-5">Remotely switch off high-consuming devices to save energy.</p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center border-b pb-3 border-gray-100">
+                            <span class="font-medium text-gray-700">HVAC System</span>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" value="" class="sr-only peer" checked>
+                                <div class="w-11 h-6 bg-gray-200 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                            </label>
+                        </div>
+                        <div class="flex justify-between items-center border-b pb-3 border-gray-100">
+                            <span class="font-medium text-gray-700">Water Heater</span>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" value="" class="sr-only peer">
+                                <div class="w-11 h-6 bg-gray-200 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                            </label>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-700">Laundry Unit</span>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" value="" class="sr-only peer" checked>
+                                <div class="w-11 h-6 bg-gray-200 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card p-5 rounded-xl border-t-4 border-yellow-500">
+                    <h3 class="text-xl font-semibold mb-4">Leak Detection History</h3>
+                    <ul class="text-sm text-gray-700 space-y-3">
+                        <li class="flex justify-between items-center pb-2 border-b border-gray-100">
+                            <span class="font-medium text-red-600">Power Spike (Cleared)</span>
+                            <span class="text-xs text-gray-500">04:15 AM Today</span>
+                        </li>
+                        <li class="flex justify-between items-center pb-2 border-b border-gray-100">
+                            <span class="font-medium text-orange-600">Minor Water Drip Alert</span>
+                            <span class="text-xs text-gray-500">Yesterday, 10:30 PM</span>
+                        </li>
+                        <li class="flex justify-between items-center">
+                            <span class="font-medium text-green-600">System Check Complete</span>
+                            <span class="text-xs text-gray-500">2 days ago, 08:00 AM</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const LEAK_THRESHOLD = 3.0; 
+        let isLeakActive = false;
+        let totalDailyUsage = 0;
+        let chartDataPoints = []; 
+        let chartLabels = [];
+        const updateIntervalMs = 1000; 
+
+        // ----------------------------------------------------
+        // 1. CHART.JS INITIALIZATION
+        // ----------------------------------------------------
+
+        for (let i = 59; i >= 0; i--) {
+            chartLabels.push(`${i}s ago`);
+            chartDataPoints.push(parseFloat((Math.random() * (1.5 - 0.5) + 0.5).toFixed(2))); 
+        }
+        chartLabels[59] = 'Now';
+
+        const ctx = document.getElementById('usageChart').getContext('2d');
+        const usageChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: chartLabels,
+                datasets: [{
+                    label: 'Power Usage (kW)',
+                    data: chartDataPoints,
+                    borderColor: 'rgb(79, 70, 229)', 
+                    backgroundColor: 'rgba(79, 70, 229, 0.1)',
+                    fill: true,
+                    tension: 0.2,
+                    pointRadius: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Power (kW)'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+
+        // ----------------------------------------------------
+        // 2. LIVE DATA SIMULATION & LEAK DETECTION
+        // ----------------------------------------------------
+
+        function generateNewData() {
+            let baseUsage = 1.0;
+            let fluctuation = (Math.random() * 0.5) - 0.25; 
+            let newKWh = parseFloat((baseUsage + fluctuation).toFixed(2));
+
+            if (isLeakActive) {
+                newKWh = parseFloat((Math.random() * (5.0 - 3.0) + 3.0).toFixed(2));
+            } else if (newKWh > LEAK_THRESHOLD) {
+                simulateLeak(true);
+            }
+            
+            return newKWh;
+        }
+
+        function updateDashboard() {
+            const newUsage = generateNewData();
+            
+            chartDataPoints.shift(); 
+            chartDataPoints.push(newUsage); 
+
+            usageChart.data.datasets[0].data = chartDataPoints;
+            usageChart.update('none'); 
+
+            document.getElementById('current-kwh').textContent = newUsage.toFixed(2);
+            
+            totalDailyUsage += newUsage * (updateIntervalMs / 3600000); 
+            document.getElementById('daily-total').textContent = totalDailyUsage.toFixed(1) + ' kWh';
+
+            const projectedBill = totalDailyUsage * 0.10;
+            document.getElementById('projected-bill').textContent = `$${projectedBill.toFixed(2)}`;
+            
+        }
+
+
+        // ----------------------------------------------------
+        // 3. LEAK SIMULATION/VISUALIZATION LOGIC
+        // ----------------------------------------------------
+
+        function simulateLeak(isSystemTriggered = false) {
+            const leakCard = document.getElementById('leak-card');
+            const statusIcon = document.getElementById('status-icon');
+            const statusMessage = document.getElementById('status-message');
+            const leakButton = leakCard.querySelector('button');
+
+            if (!isLeakActive) {
+                
+                isLeakActive = true;
+                
+                const alertMessage = isSystemTriggered 
+                    ? 'LEAK DETECTED! ANOMALY SPIKE' 
+                    : 'LEAK SIMULATED! HIGH USAGE';
+                
+                
+                leakCard.classList.remove('border-green-500');
+                leakCard.classList.add('border-red-500', 'animate-pulse'); 
+                
+                
+                statusIcon.classList.remove('text-green-500');
+                statusIcon.classList.add('text-red-500');
+                statusIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>`; 
+                
+                
+                statusMessage.classList.remove('text-green-600');
+                statusMessage.classList.add('text-red-600', 'font-extrabold');
+                statusMessage.textContent = alertMessage;
+
+            
+                leakButton.textContent = '(Click to Clear Alert)';
+
+            } else {
+            
+                isLeakActive = false;
+
+                
+                leakCard.classList.remove('border-red-500', 'animate-pulse');
+                leakCard.classList.add('border-green-500');
+
+                
+                statusIcon.classList.remove('text-red-500');
+                statusIcon.classList.add('text-green-500');
+                statusIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>`; 
+                
+                
+                statusMessage.classList.remove('text-red-600', 'font-extrabold');
+                statusMessage.classList.add('text-green-600');
+                statusMessage.textContent = 'All Systems Normal';
+                
+            
+                leakButton.textContent = '(Click to Simulate Leak Alert)';
+            }
+        }
+
+        // ----------------------------------------------------
+        // 4. MONITOR BUTTON FUNCTIONALITY
+        // ----------------------------------------------------
+
+        function toggleMonitorPanel() {
+            const panel = document.getElementById('advanced-monitor-panel');
+            const button = document.getElementById('monitor-button');
+
+            if (panel.classList.contains('active')) {
+                
+                panel.classList.remove('active');
+                button.textContent = 'Monitor Energy';
+                button.classList.replace('bg-green-600', 'bg-indigo-600');
+            } else {
+                
+                panel.classList.add('active');
+                button.textContent = 'Hide Advanced Monitor';
+                button.classList.replace('bg-indigo-600', 'bg-green-600');
+                
+            
+                panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+
+        setInterval(updateDashboard, updateIntervalMs); 
+    </script>
+
+</body>
+</html>
